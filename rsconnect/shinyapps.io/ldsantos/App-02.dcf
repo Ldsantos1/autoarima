@@ -1,0 +1,14 @@
+name: App-02
+title: App-02
+username:
+account: ldsantos
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9110740
+bundleId: 7221681
+url: https://ldsantos.shinyapps.io/App-02/
+when: 1684183539.64833
+lastSyncTime: 1684183539.64834
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Autoarima (include in App).R
