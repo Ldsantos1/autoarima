@@ -13,14 +13,16 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ## Demand forecast app using auto.arima function
 
 ::: {style="text-align: justify"}
-This is an R Markdown document with Shiny app. You can use this app to capture historical demand from a CSV file, browsing the desired sku, checking the results and then export the estimated demand to an Excel file.
+This is an R Markdown document with Shiny app that executes the auto.arima function (package forecast). You can use this app to capture historical demand from a CSV file, browsing the desired sku, checking the results and then export the estimated demand to an Excel file.
+Analogically, demand systems use supervised ML algorithms for prediction, using a similar approach: capture historical information thru interfaces with the ERP systems and then, generating the forecasts. 
+There are many other techniques for estimation in the two most popular open sources softwares: R & Python. In this work I use the seasonal auto regressive integrated moving average model (SARIMA) for prediction. 
+Theoretically time series model only uses past data to estimate future demand. If any other component is necessary for estimation, like historical prices, quality scale (e.g. Likert), etc. a different approach should be used (e.g. GLM models).
 :::
 
 ```{r}
 library(shiny)
 library(data.table)
 library(forecast)
-library(utils)
 
 # Define UI for data upload app ----
 ui <- fluidPage(
@@ -62,9 +64,7 @@ ui <- fluidPage(
                    choices = c(Head = "head",
                                All = "all"),
                    selected = "head"),
-      
-      # Button: Export fitted values ----
-      downloadLink("fitted", "Export Fitted Values")
+
     ),
     # Main panel for displaying outputs ----
     
@@ -128,7 +128,7 @@ server <- function(input, output, session) {
       data.ts <- ts(subset_sales[, 2], frequency = 12, start = c(year_init, month_init))
       model <- auto.arima(data.ts)
       forecast <- data.frame(forecast(model, level = 95))
-      summary(forecast)
+      forecast
     }
   })
   
@@ -147,18 +147,7 @@ server <- function(input, output, session) {
     }
   })
 
-  output$fitted <- downloadHandler(
-    filename = function() {
-      paste("fitted", ".csv", sep="")
-    },
-    content = function(file) {
-      write.csv(data, file)
-    }
-  )
-  
 }
-
-
 # Create Shiny app ----
 shinyApp(ui, server)
 
