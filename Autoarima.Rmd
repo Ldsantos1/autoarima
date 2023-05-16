@@ -13,10 +13,11 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ## Demand forecast app using auto.arima function
 
 ::: {style="text-align: justify"}
-This is an R Markdown document with Shiny app that executes the auto.arima function (package forecast). You can use this app to capture historical demand from a CSV file, browsing the desired sku, checking the results and then export the estimated demand to an Excel file.
-Analogically, demand systems use supervised ML algorithms for prediction, using a similar approach: capture historical information thru interfaces with the ERP systems and then, generating the forecasts. 
-There are many other techniques for estimation in the two most popular open sources softwares: R & Python. In this work I use the seasonal auto regressive integrated moving average model (SARIMA) for prediction. 
-Theoretically time series model only uses past data to estimate future demand. If any other component is necessary for estimation, like historical prices, quality scale (e.g. Likert), etc. a different approach should be used (e.g. GLM models).
+This is an R Markdown document with Shiny app that executes the auto.arima function (package forecast). You can use this app to capture historical demand from a CSV file, browsing the desired sku and checking the results.
+Analogically, demand systems use supervised ML algorithms for prediction, using a similar approach: capture historical information using interfaces with the ERP systems (text files) and then, generates the forecasts. 
+There are many other techniques for estimation in the two most popular open sources softwares: R & Python. In this work I use the seasonal auto regressive integrated moving average model (SARIMA) for prediction. Theoretically time series model only uses past data to estimate future demand. If any other component is necessary for estimation, like historical prices, quality scale (e.g. Likert), etc. a different approach should be used (e.g. GLM models).
+
+[Click here for the manual](https://rpubs.com/Ldsantos/1042313){target="_blank"}
 :::
 
 ```{r}
@@ -26,6 +27,7 @@ library(forecast)
 
 # Define UI for data upload app ----
 ui <- fluidPage(
+    
   # App title ----
   titlePanel("Demand forecast using ARIMA model"),
   

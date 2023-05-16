@@ -1,0 +1,51 @@
+---
+title: "Instructions"
+author: "Leandro"
+date: "2023-05-16"
+output: html_document
+css: style.css
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+1 - Click in "Browse"
+
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Initial.png)
+
+2 - Load the csv file containing the Historical data.
+
+**Important**
+
+The layout of this document must be:
+
+1st column - SKU code
+
+2nd column - Demand
+
+3rd column - Period in a text format "YYYY-MM".
+
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Browsing_doc.png)
+
+3 - After loaded, you may see a table with the loaded data
+
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Loaded.png)
+
+4 - In the field "SKU" inform the desired sku.
+
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_1.png)
+
+5 - In the tab "Model" you will see the chosen model. In the example (an
+item with seasonal and trend pattern) the model chosen was an seasonal
+AR(1) with 1 lag of displacement I(1)
+
+![Caption for the
+picture.](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_2.png)
+
+6 - In the tab "Residuals" you will see the residual analysis. ![Caption
+for the
+picture.](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_3.png)
