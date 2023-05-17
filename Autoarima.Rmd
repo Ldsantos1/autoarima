@@ -17,13 +17,15 @@ This is an R Markdown document with Shiny app that executes the auto.arima funct
 Analogically, demand systems use supervised ML algorithms for prediction, using a similar approach: capture historical information using interfaces with the ERP systems (text files) and then, generates the forecasts. 
 There are many other techniques for estimation in the two most popular open sources softwares: R & Python. In this work I use the seasonal auto regressive integrated moving average model (SARIMA) for prediction. Theoretically time series model only uses past data to estimate future demand. If any other component is necessary for estimation, like historical prices, quality scale (e.g. Likert), etc. a different approach should be used (e.g. GLM models).
 
-[Click here for the manual](https://rpubs.com/Ldsantos/1042313){target="_blank"}
+[Click here to see the instructions with examples](https://rpubs.com/Ldsantos/1042313){target="_blank"}
 :::
 
 ```{r}
 library(shiny)
 library(data.table)
 library(forecast)
+library(FinTS)
+
 
 # Define UI for data upload app ----
 ui <- fluidPage(
@@ -75,7 +77,9 @@ ui <- fluidPage(
         tabPanel("Table", tableOutput("contents")),
         tabPanel("Model", plotOutput("plot"),
                  verbatimTextOutput("model_summary")),
-        tabPanel("Residuals", plotOutput("residuals"))
+        tabPanel("Residuals", plotOutput("residuals"),
+                 verbatimTextOutput("test_norm"),
+                 verbatimTextOutput("test_arch"))
       )
     )
   )
@@ -148,6 +152,35 @@ server <- function(input, output, session) {
       checkresiduals(model)
     }
   })
+
+      output$test_norm <- renderPrint({
+    req(data())
+    
+    if (input$sku != "") {
+      subset_sales <- subset(data(), data()[, 1] == input$sku)
+      year_init <- min(as.numeric(substr(data()[,3], 1, 4)))
+      month_init <- min(as.numeric(substr(data()[,3], 6, 7)))
+      data.ts <- ts(subset_sales[, 2], frequency = 12, start = c(year_init, month_init))
+      model <- auto.arima(data.ts)
+      test_result_norm <- ks.test(model$residuals, "pnorm", mean(model$residuals),
+			sd(model$residuals))
+      test_result_norm
+    }
+  })  
+
+    output$test_arch <- renderPrint({
+    req(data())
+    
+    if (input$sku != "") {
+      subset_sales <- subset(data(), data()[, 1] == input$sku)
+      year_init <- min(as.numeric(substr(data()[,3], 1, 4)))
+      month_init <- min(as.numeric(substr(data()[,3], 6, 7)))
+      data.ts <- ts(subset_sales[, 2], frequency = 12, start = c(year_init, month_init))
+      model <- auto.arima(data.ts)
+      test_result_arch <- ArchTest(model$residuals)
+      test_result_arch
+    }
+  })  
 
 }
 # Create Shiny app ----

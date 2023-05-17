@@ -3,7 +3,6 @@ title: "Instructions"
 author: "Leandro"
 date: "2023-05-16"
 output: html_document
-css: style.css
 editor_options: 
   markdown: 
     wrap: 72
@@ -13,6 +12,7 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+::: {style="text-align: justify"}
 1 - Click in "Browse"
 
 ![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Initial.png)
@@ -39,13 +39,36 @@ The layout of this document must be:
 
 ![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_1.png)
 
-5 - In the tab "Model" you will see the chosen model. In the example (an
-item with seasonal and trend pattern) the model chosen was an seasonal
-AR(1) with 1 lag of displacement I(1)
+5 - In the tab "Model" you will see the chosen model, the estimation
+including the range representing 95% of confidence interval and a plot
+with historical and estimated data
 
-![Caption for the
-picture.](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_2.png)
+5.1 - In this first example (an item with seasonal and trend pattern)
+the model chosen was an seasonal pattern with lag 12 [12] seasonal
+autoregressive order (1) and seasonal difference order I(1). In essence,
+the model SARIMA (0,0,0)(1,1,0)[12]
 
-6 - In the tab "Residuals" you will see the residual analysis. ![Caption
-for the
-picture.](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_3.png)
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_2.png)
+
+5.2 - In this second example, a simulated demand of an item with only a
+positive trend pattern. The chosen model was a single AR(2) with 1
+differentiation I(1)
+
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_2_1.png)
+
+5.3 - For items without any pattern, only a moving average was enough.
+In this example the model chosen was an ARIMA(0,0,2).
+
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_2_2.png)
+
+6 - In the tab "Residuals" you will see the residual analysis. In the
+three examples (item "A" without any pattern, "B" with trend and "C"
+with trend and season pattern) the residuals are independent and
+identically distributed. The ACF graph shows that all residuals are not
+statistically significant, normally distributed (KS test) and are
+homoskedastic (ARCH test).
+
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_3.png)
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_3_1.png)
+![](C:/Users/leand/OneDrive/Documentos/DatafilesR/App-02/Chosen_sku_3_2.png)
+:::
