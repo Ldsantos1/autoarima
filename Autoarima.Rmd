@@ -19,7 +19,7 @@ Forecast systems in the market usually works with interfaces capturing historica
 
 ARIMA is a time series model and only uses the past data to predict future data. If any other variable, in addition to the past data, is necessary for estimation (like historical prices, quality scale (e.g. Likert), etc. a different technique should be used (e.g. GLM or multilevel GLM models).
 
-~**\*\*\ User\ must\ manually\ retrieve\ the\ information\ (see\ instruction\ below)**~
+~**\*\* User must manually retrieve the information (see instruction below)**~
 
 [Click here to see the instructions with examples](https://rpubs.com/Ldsantos/1042313){target="_blank"}
 :::
@@ -41,39 +41,47 @@ ui <- fluidPage(
   sidebarLayout(
     # Sidebar panel for inputs ----
     sidebarPanel(
+      
       # Input: Select a file ----
       fileInput("file1", "Choose CSV File",
                 multiple = TRUE,
                 accept = c("text/csv",
                            "text/comma-separated-values,text/plain",
                            ".csv")),
+      
       # Horizontal line ----
       tags$hr(),
+      
       # Input: Checkbox if file has header ----
       checkboxInput("header", "Header", TRUE),
+      
       # Input: Select values
       textInput("sku", "SKU", value = ""),
+      
       # Input: Select separator ----
       radioButtons("sep", "Separator",
                    choices = c(Comma = ",",
                                Semicolon = ";",
                                Tab = "\t"),
                    selected = ","),
+      
       # Input: Select quotes ----
       radioButtons("quote", "Quote",
                    choices = c(None = "",
                                "Double Quote" = '"',
                                "Single Quote" = "'"),
                    selected = '"'),
+      
       # Horizontal line ----
       tags$hr(),
+      
       # Input: Select number of rows to display ----
       radioButtons("disp", "Display",
                    choices = c(Head = "head",
                                All = "all"),
                    selected = "head"),
-
     ),
+    
     # Main panel for displaying outputs ----
     
     mainPanel(
