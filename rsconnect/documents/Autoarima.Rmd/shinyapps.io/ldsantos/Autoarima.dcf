@@ -5,9 +5,9 @@ account: ldsantos
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9122561
-bundleId: 7225850
+bundleId: 7229708
 url: https://ldsantos.shinyapps.io/Autoarima/
-when: 1684261943.85656
-lastSyncTime: 1684261943.85657
+when: 1684336201.23406
+lastSyncTime: 1684336201.23407
 asMultiple: FALSE
 asStatic: FALSE
